@@ -50,7 +50,7 @@ public class EnvParamController extends BaseController {
 
         EnvParam saveEnvParam = new EnvParam();
         BeanUtils.copyProperties(envParam, saveEnvParam);
-        saveEnvParam.setEnv(envRepo.findOne(envId));
+        saveEnvParam.setEnv(envRepo.findById(envId).get());
         envParamRepo.save(saveEnvParam);
 
         return WebResp.success("save EnvParam success");
@@ -60,7 +60,7 @@ public class EnvParamController extends BaseController {
     @RequestMapping(method = RequestMethod.PUT)
     public WebResp<String> updateEnvParam(@RequestBody EnvParamDto envParam) {
         log.info("update envParam. envParam={}", JSON.toJSONString(envParam));
-        EnvParam updateEnvParam = envParamRepo.findOne(envParam.getId());
+        EnvParam updateEnvParam = envParamRepo.findById(envParam.getId()).get();
 
         log.info("updateEnvParam={}", JSON.toJSONString(updateEnvParam));
 
@@ -74,11 +74,11 @@ public class EnvParamController extends BaseController {
     @ApiOperation("Delete EnvParam / 删除某个环境参数")
     @RequestMapping(method = RequestMethod.DELETE)
     public WebResp<String> delete(@RequestParam("id") Long id) {
-        EnvParam envParam = envParamRepo.findOne(id);
+        EnvParam envParam = envParamRepo.findById(id).get();
 
         log.info("delete envParam. envParam={}", JSON.toJSONString(envParam));
 
-        envParamRepo.delete(id);
+        envParamRepo.deleteById(id);
 
         return WebResp.success("delete EnvParam success");
     }
@@ -91,7 +91,7 @@ public class EnvParamController extends BaseController {
     @ApiOperation("Add EnvParams / 新增一批环境参数")
     @RequestMapping(path = "/batch", method = RequestMethod.POST)
     public WebResp<String> createBatch(@RequestParam("envId") Long envId, @RequestBody List<EnvParamDto> envParams) {
-        Env env = envRepo.findOne(envId);
+        Env env = envRepo.findById(envId).get();
         log.info("add EnvParams to {} : {} ", env.getName(), envParams);
 
         for (EnvParamDto envParam : envParams) {
@@ -111,7 +111,7 @@ public class EnvParamController extends BaseController {
         log.info("delete EnvParams : {} ", envParamIds);
 
         for (Long id : envParamIds) {
-            envParamRepo.delete(id);
+            envParamRepo.deleteById(id);
         }
 
         return WebResp.success("batch delete EnvParams ：" + envParamIds.size());

@@ -61,7 +61,7 @@ public class PropertyController extends BaseController {
     public WebResp<String> encrypt(@RequestParam("envId") Long envId,
                                    @RequestBody String value) {
         // 指定某个环境的加密（单个值）
-        Env env = envRepo.findOne(envId);
+        Env env = envRepo.findById(envId).get();
 
         Assert.notNull(env, "Env [" + envId + "] not exist");
 
@@ -76,7 +76,7 @@ public class PropertyController extends BaseController {
     public WebResp<String> decrypt(@RequestParam("envId") Long envId,
                                    @RequestBody String value) {
         // 指定某个环境的解密（单个值）
-        Env env = envRepo.findOne(envId);
+        Env env = envRepo.findById(envId).get();
 
         Assert.notNull(env, "Env [" + envId + "] not exist");
 

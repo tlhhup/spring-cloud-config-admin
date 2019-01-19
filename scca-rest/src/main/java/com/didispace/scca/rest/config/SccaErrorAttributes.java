@@ -1,20 +1,17 @@
 package com.didispace.scca.rest.config;
 
-import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
 
 public class SccaErrorAttributes extends DefaultErrorAttributes {
 
     @Override
-    public Map<String, Object> getErrorAttributes(RequestAttributes requestAttributes,
-                                                  boolean includeStackTrace) {
-        Map<String, Object> body = super.getErrorAttributes(requestAttributes, includeStackTrace);
+    public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
+        Map<String, Object> body = super.getErrorAttributes(webRequest, includeStackTrace);
         body.put("code", body.get("status"));
         body.remove("status");
         return body;
     }
-
 }
