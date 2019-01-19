@@ -13,7 +13,7 @@
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.test.skip>true</maven.test.skip>
         <!--scca version-->
-        <version.scca>1.3.0</version.scca>
+        <version.scca>1.3.0-RELEASE</version.scca>
     </properties>
 
     <dependencies>

@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.8</version.java>
         <!--scca version-->
-        <version.scca>1.3.0</version.scca>
+        <version.scca>1.3.0-RELEASE</version.scca>
         <!--dependencies version-->
         <version.spring-boot>2.0.1.RELEASE</version.spring-boot>
         <version.spring-cloud>Finchley.SR1</version.spring-cloud>
